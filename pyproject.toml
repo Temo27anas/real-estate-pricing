@@ -23,4 +23,6 @@ dependencies = [
     "seaborn>=0.13.2",
     "streamlit>=1.48.1",
     "xgboost==3.0.4",
+    "asttokens>=2.2.1",
+    "ipykernel>=7.1.0",
 ]
