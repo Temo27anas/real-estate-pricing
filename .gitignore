@@ -12,4 +12,16 @@ wheels/
 # Data files
 /data/
 
+# MLflow runs
 mlruns/
+
+# models
+/models/
+
+# Temprorary test notebook
+test_dumped_models.ipynb
+
+# Temporary for organized version controlling
+inference_pipeline/
+training_pipeline/
+
