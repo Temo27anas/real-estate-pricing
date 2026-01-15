@@ -17,13 +17,13 @@ city_mapping = {
 }
 
 
-def clean_merge_citydata(df):
+def clean_merge_citydata(df, metro_path=METRO_DATA_PATH):
     """Merge latitude and longitude data based on city/metro names."""
 
     if 'city_full' not in df.columns:
         raise ValueError("DataFrame must contain 'city_full' column.")
     
-    metros_df = pd.read_csv(METRO_DATA_PATH)
+    metros_df = pd.read_csv(metro_path)
 
     # Keep only the primary metro name before the comma
     metros_df['metro_full'] = metros_df['metro_full'].apply(lambda x: x.split(',')[0] if pd.notnull(x) else x)

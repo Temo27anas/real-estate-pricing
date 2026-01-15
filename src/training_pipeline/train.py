@@ -11,6 +11,13 @@ DEFAULT_TRAIN_PATH = Path("data/processed/HouseTS_train_FE.csv")
 DEFAULT_VALIDATION_PATH = Path("data/processed/HouseTS_validation_FE.csv")
 OUTPUT_MODEL_PATH = Path("models")
 
+def evaluate_model(y_true, y_pred):
+    """Evaluate model performance using RMSE, MAE, and R2 metrics"""
+    rmse = np.sqrt(mean_squared_error(y_true, y_pred))
+    mae = mean_absolute_error(y_true, y_pred)
+    r2 = r2_score(y_true, y_pred)
+    print(f"RMSE: {rmse:.2f}, MAE: {mae:.2f}, R2: {r2:.4f}")
+    return rmse, mae, r2
 
 def train_model():
     """Train XGBoost regression model on training data and evaluate on validation data"""
@@ -39,15 +46,7 @@ def train_model():
 
     y_pred = xgb_model.predict(X_validation)
 
-    mse = mean_squared_error(y_validation, y_pred)
-    rmse = np.sqrt(mse)
-    mae = mean_absolute_error(y_validation, y_pred)
-    r2 = r2_score(y_validation, y_pred)
-
-    print(f"XGBoost Regression Performance on Validation Set:")
-    print(f"RMSE: {rmse:.2f}")
-    print(f"MAE: {mae:.2f}")
-    print(f"R²: {r2:.4f}")
+    rmse, mae, r2 = evaluate_model(y_validation, y_pred)
 
     # save model
     OUTPUT_MODEL_PATH.mkdir(parents=True, exist_ok=True)
